@@ -1,33 +1,36 @@
 #include <stdio.h>
 
 /**
- * main - function that checks for uppercase character.
- * Return: 0
+ * main - Prints the numbers from 1-100, but for multiples of three,
+ *        Fizz is printed instead of the number, for multiples of five,
+ *        Buzz, and for multiples of both three and five, FizzBuzz.
+ *
+ * Return: Always 0.
  */
-
 int main(void)
 {
-	int h = 1;
+	int num;
 
-	while (h <= 100)
+	for (num = 1; num <= 100; num++)
 	{
-		if (h % 3 == 0 && h % 5 == 0)
-			printf("FizzBuzz ");
-		else if (h % 5 == 0)
-		{
-			if (h == 100)
-			{
-				printf("Buzz");
-				printf("\n");
-			}
-			else
-				printf("Buzz ");
-		}
-		else if (h % 3 == 0)
-			printf("Fizz ");
+		if ((num % 3) == 0 && (num % 5) == 0)
+			printf("FizzBuzz");
+
+		else if ((num % 3) == 0)
+			printf("Fizz");
+
+		else if ((num % 5) == 0)
+			printf("Buzz");
+
 		else
-			printf("%d ", h);
-		h++;
+			printf("%d", num);
+
+		if (num == 100)
+			continue;
+		printf(" ");
 	}
+
+	printf("\n");
+
 	return (0);
 }

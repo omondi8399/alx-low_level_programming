@@ -1,54 +1,60 @@
+#include <stdlib.h>
+#include <string.h>
 #include "hash_tables.h"
 
 /**
- * hash_table_set - Add or update an element in a hash table.
- * @ht: A pointer to the hash table.
- * @key: The key to add - cannot be an empty string.
- * @value: The value associated with key.
+ * add_node - adds a new node at the beginning of a singly linked list
+ * @head: head of the list
+ * @key: key of the node
+ * @value: value of the node
  *
- * Return: Upon failure - 0.
- *         Otherwise - 1.
+ * Description: adds a new node to at begining of an index of a hash table
+ *
+ * Return: nothing
  */
-
-int hash_table_set(hash_table_t *ht, const char *key, const char *value)
+void add_node(hash_node_t **head, const char *key, const char *value)
 {
-	hash_node_t *new;
-	char *value_copy;
-	unsigned long int index, i;
-
-	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
-		return (0);
-
-	value_copy = strdup(value);
-	if (value_copy == NULL)
-		return (0);
-
-	index = key_index((const unsigned char *)key, ht->size);
-	for (i = index; ht->array[i]; i++)
-	{
-		if (strcmp(ht->array[i]->key, key) == 0)
-		{
-			free(ht->array[i]->value);
-			ht->array[i]->value = value_copy;
-			return (1);
-		}
-	}
+	hash_node_t *new = NULL, *temp = *head;
 
 	new = malloc(sizeof(hash_node_t));
-	if (new == NULL)
-	{
-		free(value_copy);
-		return (0);
-	}
+	if (!new)
+		exit(0);
 	new->key = strdup(key);
-	if (new->key == NULL)
-	{
-		free(new);
-		return (0);
-	}
-	new->value = value_copy;
-	new->next = ht->array[index];
-	ht->array[index] = new;
+	if (!new->key)
+		exit(0);
+	new->value = strdup(value);
+	if (!new->value)
+		exit(0);
+	if (temp)
+		new->next = temp;
+	else
+		new->next = NULL;
+	*head = new;
+}
 
+/**
+ * hash_table_set - adds a new element to a hash table
+ * @ht: address of hash table
+ * @key: key
+ * @value: value associated with the key
+ *
+ * Return: 1 on success, 0 on failure
+ */
+int hash_table_set(hash_table_t *ht, const char *key, const char *value)
+{
+	unsigned long int index;
+	hash_node_t *temp = NULL;
+
+	if (!ht || !key || *key == '\0' || !value)
+		return (0);
+	index = key_index((const unsigned char *)key, ht->size);
+	for (temp = ht->array[index]; temp; temp = temp->next)
+		if (strcmp(temp->key, key) == 0)
+		{
+			free(temp->value);
+			temp->value = strdup(value);
+			return (1);
+		}
+	add_node(&(ht->array[index]), key, value);
 	return (1);
 }

@@ -1,14 +1,14 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
- * add - Adds two integers.
- * @num1: The first integer to be added.
- * @num2: The second integer to be added.
- * code written by Vincent Kimatu
- * Return: always 0
+ * add -prints add two numbers
+ *@i: print int i
+ *@k: print int k
+ * Return: Always 0.
  */
 
-int add(int num1, int num2)
+int add(int i, int k)
 {
-	return (num1 + num2);
+return (i + k);
 }

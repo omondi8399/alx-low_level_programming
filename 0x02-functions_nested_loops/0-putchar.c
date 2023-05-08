@@ -1,10 +1,9 @@
 #include "main.h"
 
 /**
- * main - print putchar
- * code written by Vincent Kimatu
- * Return: always 0
- */
+  * main - prints _putchar
+  * Return: Always 0
+  */
 
 int main(void)
 {

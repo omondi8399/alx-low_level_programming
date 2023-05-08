@@ -1,27 +1,32 @@
 #include <stdio.h>
 
 /**
- * main - prints sum of even fibonacci
- * suit elements
- * fibonacci suit numbers
- * code written by Vincent Kimatu
- * Return: always 0
+ * main - Entry point
+ *
+ * purpose - fibonacci
+ *
+ * Return: (0) always
  */
-
 int main(void)
 {
-	unsigned long n1 = 0, n2 = 1, n3 = 0, sum = 0;
+unsigned long int lim = 4000000;
+unsigned long int bef = 0;
+unsigned long int aft = 1;
+unsigned long int R = 0;
+unsigned long int sum = 0;
 
-	while (n3 <= 4000000)
-	{
-		n3 = n1 + n2;
-		n1 = n2;
-		n2 = n3;
+															while (lim > R)
+																		{
+															R = bef + aft;
 
-		if ((n1 % 2) == 0)
-			sum += n1;
+															if ((R % 2) == 0)
+															{
+																														sum += R;
+																														}
 
-	}
-	printf("%ld\n", sum);
-	return (0);
+															bef = aft;
+																														aft = R;
+																																	}
+															printf("%li\n", sum);
+															return (0);
 }

@@ -1,26 +1,39 @@
 #!/usr/bin/python3
-"""Defines an island perimeter measuring function."""
+"""
+    This is the island_perimeter module.
+"""
+
+
+def neighbour(grid, y, x):
+    """
+        Finds the number of neighbours of a square.
+        Args:
+            grid (list): the matrix.
+            y (int): height parameter.
+            x (int): width parameter.
+    """
+    nb = 4
+
+    if (y > 0) and grid[y - 1][x]:
+        nb -= 1
+    if (x > 0) and grid[y][x - 1]:
+        nb -= 1
+    if (y < len(grid) - 1) and grid[y + 1][x]:
+        nb -= 1
+    if (x < len(grid[0]) - 1) and grid[y][x + 1]:
+        nb -= 1
+    return nb
 
 
 def island_perimeter(grid):
-    """Return the perimiter of an island.
-    The grid represents water by 0 and land by 1.
-    Args:
-        grid (list): A list of list of integers representing an island.
-    Returns:
-        The perimeter of the island defined in grid.
     """
-    width = len(grid[0])
-    height = len(grid)
-    edges = 0
-    size = 0
-
-    for i in range(height):
-        for j in range(width):
-            if grid[i][j] == 1:
-                size += 1
-                if (j > 0 and grid[i][j - 1] == 1):
-                    edges += 1
-                if (i > 0 and grid[i - 1][j] == 1):
-                    edges += 1
-    return size * 4 - edges * 2
+        Finds the island perimeter.
+        Args:
+            grid (list): the matrix.
+    """
+    perimeter = 0
+    for y in range(len(grid)):
+        for x in range(len(grid[0])):
+            if grid[y][x] == 1:
+                perimeter += neighbour(grid, y, x)
+    return perimeter

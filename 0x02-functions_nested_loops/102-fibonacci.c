@@ -1,33 +1,20 @@
 #include <stdio.h>
-
 /**
- * main - prints out first 50
- * fibonacci suit numbers
- * code written by Vincent Kimatu
- * Return: always 0
+ * main - print first 50 fibonacci
+ *
+ * Return: 0 always.
  */
-
 int main(void)
 {
-	int inc;
-
-	unsigned long n1 = 0, n2 = 1, n3;
-
-	for (inc = 0; inc < 50; inc++)
-	{
-		n3 = n1 + n2;
-
-		printf("%lu", n3);
-		n1 = n2;
-
-		n2 = n3;
-
-		if (inc == 49)
-			printf("\n");
-		else
-			printf(", ");
-
-	}
-
-	return (0);
+long int i, x = 1, y = 2, sum = 0;
+for (i = 0; i < 49; i++)
+{
+printf("%ld, ", x);
+sum = x + y;
+x = y;
+y = sum;
+if (i == 48)
+printf("%ld\n", x);
+}
+return (0);
 }
